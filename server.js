@@ -14,7 +14,7 @@ const tests = [
     checked: true,
   },
   {
-    id: 3,
+    id: 88,
     task: "sleep",
     checked: false,
   },
@@ -33,9 +33,20 @@ server.post("/tests", function (req, res) {
   res.send(tests);
 });
 
-server.delete("/rem/:first/:second/:third", function (req, res) {
-  console.log(req.params);
-  res.send("gelukt");
+server.delete("/rem/:id", function (req, res) {
+  //console.log(req.params.id);
+  const foundIndex = tests.findIndex(
+    (test) => test.id === parseInt(req.params.id)
+  );
+
+  if (foundIndex === -1) {
+    res.status(404).send({
+      error: "index not found",
+    });
+  } else {
+    tests.splice(foundIndex, 1);
+    res.send(tests);
+  }
 });
 //server.put();
 
