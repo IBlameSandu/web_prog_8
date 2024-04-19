@@ -1,5 +1,6 @@
 const express = require("express");
 const server = express();
+server.use(express.json());
 
 const tests = [
   {
@@ -22,7 +23,15 @@ const tests = [
 server.get("/tests", function (req, res) {
   res.send(tests);
 });
-//server.post();
+server.post("/tests", function (req, res) {
+  console.log(req.body.task);
+  tests.push({
+    id: tests.length + 1,
+    task: req.body.task,
+    checked: false,
+  });
+  res.send(tests);
+});
 //server.put();
 //server.delete();
 
