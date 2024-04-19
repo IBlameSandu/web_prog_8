@@ -32,8 +32,12 @@ server.post("/tests", function (req, res) {
   });
   res.send(tests);
 });
+
+server.delete("/rem/:first/:second/:third", function (req, res) {
+  console.log(req.params);
+  res.send("gelukt");
+});
 //server.put();
-//server.delete();
 
 server.listen(1234, function () {
   console.log("your server is now listening on http://localhost:1234");
